@@ -1,4 +1,4 @@
-- name: install
+- name: Install
   hosts: all
   become: true
   tasks:
@@ -9,6 +9,7 @@
       vars:
         packages:
           - clangd-14
+          - git
           - cmake 
           - g++ 
           - pkg-config 
