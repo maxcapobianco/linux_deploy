@@ -27,3 +27,9 @@
       dest: "{{ ansible_env.HOME }}/.config/nvim"
       recursive: yes
       mode: push
+
+  - name: Deploy Tmux Config
+    template:
+      src: templates/tmux/tmux.conf.j2
+      dest: "{{ ansible_env.HOME }}/.config/.tmux.conf"
+      mode: '0644'

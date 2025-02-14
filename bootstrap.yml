@@ -14,5 +14,8 @@
 - name: Install NeoVim 
   import_playbook: playbooks/user/install_nvim.yml
 
+- name: Install tmux 
+  import_playbook: playbooks/user/install_tmux.yml
+
 - name: Configure isntalled packages
   import_playbook: playbooks/user/configure_system.yml

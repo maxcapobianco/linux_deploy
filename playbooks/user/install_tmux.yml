@@ -1,6 +1,18 @@
-# https://github.com/tmux-plugins/tpm
-#
-# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-#
-# tmux config
-#
+---
+- name: Install tmux
+  hosts: all
+  gather_facts: true
+  become: true
+  tasks:
+
+  - name: install apt packages
+    apt:
+      name: tmux
+      state: latest
+
+  - name: git clone tpm 
+    git:
+      repo: 'https://github.com/tmux-plugins/tpm'
+      dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+      clone: yes
+      update: yes
