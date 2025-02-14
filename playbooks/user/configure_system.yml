@@ -9,7 +9,7 @@
       state: directory
       mode: '0755'
 
-  - name: write alacritty config
+  - name: Deploy alacritty configuration
     template:
       src: templates/alacritty/alacritty.toml.j2
       dest: "{{ ansible_env.HOME }}/.config/alacritty/alacritty.toml"
@@ -21,15 +21,21 @@
       state: directory
       mode: '0755'
 
-  - name: Deploy NeoVim Config
+  - name: Deploy NeoVim configuration 
     synchronize:
       src: templates/nvim/
       dest: "{{ ansible_env.HOME }}/.config/nvim"
       recursive: yes
       mode: push
 
-  - name: Deploy Tmux Config
+  - name: Deploy Tmux configuration
     template:
       src: templates/tmux/tmux.conf.j2
       dest: "{{ ansible_env.HOME }}/.config/.tmux.conf"
+      mode: '0644'
+
+  - name: Deploy ssh-ident configuration
+    template:
+      src: templates/ssh-ident/ssh-ident.j2
+      dest: "{{ ansible_env.HOME }}/.ssh-ident"
       mode: '0644'

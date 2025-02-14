@@ -1,0 +1,42 @@
+---
+- name: Install ssh-ident
+  hosts: all
+  become: no
+  tasks:
+
+    - name: Create ~/bin directory
+      file:
+        path: "{{ ansible_env.HOME }}/bin"
+        state: directory
+        mode: '0755'
+
+    - name: Download ssh-ident script
+      get_url:
+        url: "https://goo.gl/MoJuKB"
+        dest: "{{ ansible_env.HOME }}/bin/ssh"
+        mode: '0755'
+
+    - name: Ensure ~/bin is in the PATH in .bashrc
+      lineinfile:
+        path: "{{ ansible_env.HOME }}/.bashrc"
+        line: 'export PATH={{ ansible_env.HOME }}/bin:$PATH'
+        create: yes
+        state: present
+
+    - name: Write ssh-ident configuration
+      template:
+        src: templates/ssh-ident/ssh-ident.j2
+        dest: "{{ ansible_env.HOME }}/.ssh-ident"
+        mode: '0644'
+
+    - name: Check for personal ssh keys
+      stat:
+        path: "{{ ansible_env.HOME }}/.ssh/identities/personal/"
+      register: personal_ssh_key_exists
+
+    - name: Create personal identity directory
+      when: personal_ssh_key_exists is failed
+      file:
+        path: "{{ ansible_env.HOME }}/.ssh/identities/personal"
+        state: directory
+        mode: '0755'
