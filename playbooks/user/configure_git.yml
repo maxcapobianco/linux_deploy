@@ -1,0 +1,10 @@
+---
+- name: Configure Git
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Set alias for git log with graphical output
+      ansible.builtin.git_config:
+        name: alias.lg
+        value: "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+        scope: global
