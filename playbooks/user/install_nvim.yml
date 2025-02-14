@@ -41,3 +41,10 @@
       file:
         path: /tmp/nvim-linux-x86_64.tar.gz
         state: absent
+
+    - name: Clone vscode-cpp-tools
+      git:
+        repo: 'https://github.com/microsoft/vscode-cpptools.git'
+        dest: "{{ ansible_env.HOME }}/.local/share/vscode-cpptools"
+        clone: yes
+        update: yes
