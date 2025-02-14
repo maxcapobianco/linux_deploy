@@ -12,5 +12,18 @@
   - name: write alacritty config
     template:
       src: templates/alacritty/alacritty.toml.j2
-      dest: $HOME/.config/alacritty/alacritty.toml
+      dest: "{{ ansible_env.HOME }}/.config/alacritty/alacritty.toml"
       mode: '0644'
+
+  - name: Ensure nvim config directory exists
+    file:
+      path: "{{ ansible_env.HOME }}/.config/nvim"
+      state: directory
+      mode: '0755'
+
+  - name: Deploy NeoVim Config
+    synchronize:
+      src: templates/nvim/
+      dest: "{{ ansible_env.HOME }}/.config/nvim"
+      recursive: yes
+      mode: push
