@@ -1,0 +1,16 @@
+- name: Write configs for user packages
+  hosts: all
+  gather_facts: true
+
+  tasks:
+  - name: Ensure Alacritty config directory exists
+    file:
+      path: "{{ ansible_env.HOME }}/.config/alacritty"
+      state: directory
+      mode: '0755'
+
+  - name: write alacritty config
+    template:
+      src: templates/alacritty/alacritty.toml.j2
+      dest: $HOME/.config/alacritty/alacritty.toml
+      mode: '0644'
