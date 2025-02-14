@@ -1,6 +1,0 @@
-- name: boostrap
-  hosts: all
-  tags: always
-  become: true
-  roles:
-    - base

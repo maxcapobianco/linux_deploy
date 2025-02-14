@@ -1,0 +1,46 @@
+---
+- name: Install alacritty
+  hosts: all
+  gather_facts: true
+  become: true
+
+  tasks:
+
+  - name: Check if Alacritty is already installed
+    stat:
+      path: /usr/local/bin/alacritty
+    register: alacritty_installed
+
+  - name: git clone alacritty
+    when: alacritty_installed is failed
+    git:
+      repo: 'https://github.com/alacritty/alacritty.git'
+      dest: '/tmp/alacritty'
+      clone: yes
+      update: yes
+
+  - name: build alacritty from source
+    when: alacritty_installed is failed
+    shell: . $HOME/.cargo/env && rustup default stable && cd /tmp/alacritty && cargo build --release
+    args:
+      creates: '/tmp/alacritty/target/release/alacritty'
+  
+  - name: copy alacritty binary to /usr/local/bin
+    when: alacritty_installed is failed
+    command: cp /tmp/alacritty/target/release/alacritty /usr/local/bin/alacritty
+    become: true
+
+  - name: copy alacritty icon
+    when: alacritty_installed is failed
+    command: cp /tmp/alacritty/extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+    become: true
+
+  - name: install alacritty desktop entry
+    when: alacritty_installed is failed
+    command: desktop-file-install /tmp/alacritty/extra/linux/Alacritty.desktop
+    become: true
+
+  - name: update desktop database
+    when: alacritty_installed is failed
+    command: update-desktop-database
+    become: true

@@ -1,0 +1,15 @@
+---
+- name: Ping the target machine
+  import_playbook: playbooks/ping.yml
+
+- name: Install pkgs with apt
+  import_playbook: playbooks/user/install.yml
+
+- name: Install rust
+  import_playbook: playbooks/user/install_rust.yml
+
+- name: Install alacritty
+  import_playbook: playbooks/user/install_alacritty.yml
+
+- name: Configure isntalled packages
+  import_playbook: playbooks/user/configure_system.yml
