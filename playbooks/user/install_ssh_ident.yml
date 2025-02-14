@@ -23,12 +23,6 @@
         create: yes
         state: present
 
-    - name: Write ssh-ident configuration
-      template:
-        src: templates/ssh-ident/ssh-ident.j2
-        dest: "{{ ansible_env.HOME }}/.ssh-ident"
-        mode: '0644'
-
     - name: Check for personal ssh keys
       stat:
         path: "{{ ansible_env.HOME }}/.ssh/identities/personal/"

@@ -1,4 +1,4 @@
-- name: Install apt pkgs
+- name: Install ppa pkgs
   hosts: all
   become: true
 

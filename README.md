@@ -7,7 +7,7 @@ Before Running [install ansible](https://docs.ansible.com/ansible/latest/install
   sudo apt install ansible
 ```
 
-To install user environment packages run bootstrap with:
+To install user environment packages, run bootstrap with:
 ```
 ansible-playbook -i inv/hosts bootstrap.yml
 ```

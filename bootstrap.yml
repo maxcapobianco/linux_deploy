@@ -3,7 +3,7 @@
   import_playbook: playbooks/ping.yml
 
 - name: Install pkgs with apt
-  import_playbook: playbooks/user/install_apt.yml
+  import_playbook: playbooks/user/install_ppa_pkgs.yml
 
 - name: Install rust
   import_playbook: playbooks/user/install_rust.yml
@@ -16,6 +16,9 @@
 
 - name: Install tmux 
   import_playbook: playbooks/user/install_tmux.yml
+
+- name: Install ssh-ident 
+  import_playbook: playbooks/user/install_ssh_ident.yml
 
 - name: Configure installed packages
   import_playbook: playbooks/user/configure_system.yml
