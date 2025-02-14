@@ -1,0 +1,7 @@
+[font]
+normal.family =  "JetBrainsMono"
+normal.style = "Regular"
+size = 12.0
+
+[window]
+startup_mode = "Fullscreen"
