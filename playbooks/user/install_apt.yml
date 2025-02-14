@@ -1,4 +1,4 @@
-- name: Install
+- name: Install apt pkgs
   hosts: all
   become: true
   tasks:
@@ -19,3 +19,6 @@
           - libxkbcommon-dev 
           - python3
           - tmux
+          - htop
+          - nvtop
+          - nmap
