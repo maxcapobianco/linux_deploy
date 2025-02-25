@@ -5,13 +5,7 @@
   gather_facts: true
 
   tasks:
-    - name: Check if Neovim is already installed
-      stat:
-        path: /opt/nvim-linux-x86_64/bin/nvim
-      register: nvim_installed
-
     - name: Download the latest Neovim release
-      when: nvim_installed is failed
       get_url:
         url: https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
         dest: /tmp/nvim-linux-x86_64.tar.gz
@@ -23,19 +17,10 @@
         state: absent
 
     - name: Extract Neovim tarball to /opt
-      when: nvim_installed is failed
       unarchive:
         src: /tmp/nvim-linux-x86_64.tar.gz
         dest: /opt
         remote_src: yes
-
-    - name: Add Neovim to the PATH in the user's shell config
-      when: nvim_installed is failed
-      lineinfile:
-        path: "{{ ansible_env.HOME }}/.bashrc"
-        line: 'export PATH="$PATH:/opt/nvim-linux-x86_64/bin"'
-        create: yes
-      become: false
 
     - name: Clean up the downloaded tarball
       file:

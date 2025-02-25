@@ -18,6 +18,12 @@
           - clangd-14
           - git
           - cmake 
+          - ninja-build
+          - meson
+          - lld
+          - libssl-dev
+          - nasm
+          - ca-certificates
           - g++ 
           - pkg-config 
           - libfreetype6-dev 
@@ -28,3 +34,4 @@
           - htop
           - nvtop
           - nmap
+          - net-tools
