@@ -17,8 +17,8 @@
 - name: Install tmux 
   import_playbook: playbooks/user/install_tmux.yml
 
-- name: Install ssh-ident 
-  import_playbook: playbooks/user/install_ssh_ident.yml
+#- name: Install ssh-ident 
+#  import_playbook: playbooks/user/install_ssh_ident.yml
 
 - name: Configure installed packages
   import_playbook: playbooks/user/configure_system.yml
